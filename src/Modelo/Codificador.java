@@ -21,4 +21,7 @@ public class Codificador {
     public void base64(){
         String acum;
     }
-}
+    public String XD(){
+        return "HOla";
+    }
+    }
