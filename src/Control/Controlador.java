@@ -14,7 +14,7 @@ public class Controlador {
 
     public void iniciar(){
         Codificador objC = new Codificador();
-        objC.setTxtAscii("hola");
-        objC.base64();
+        objC.setTxtAscii("hola que hace");
+        objC.base64(objC.getTxtAscii());
     }
 }

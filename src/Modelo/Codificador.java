@@ -18,31 +18,37 @@ public class Codificador {
         this.jt = null;
     }
 
-    public String [] binary(){
-        String binary="";
-        char[] chars = txtAscii.toCharArray(); //la cadena se pasa a un array de chars
-        binaries = new String[chars.length]; //se crea un arreglo con la longitud de los chars
-        for(int i = 0; i < chars.length; i++){
-            int caracter = chars[i]; //se pasa el acaracter a entero
-            binary += Integer.toBinaryString(caracter); // de entero a binario
-            binaries[i] = Integer.toBinaryString(caracter);; //se agregar el binario al array
-        }
-        return binaries;
-    }
 
     //Esto es para que mas o menos se guie a la hora de conectar esto con el frame
-    public void base64(){
-        String eq_Ascii = Texto(binary());
-        System.out.println(Arrays.toString(binaries)); // verifica si tiene 8 bits, en caso contrario los rellena
-        String [] Base64 = SepararEn6(eq_Ascii).split(",");// separa en 6 bits
-        System.out.println(Arrays.toString(Base64));
-        String igual =  Iguales(Base64[Base64.length-1]); // se sacan los iguales
-        Base64[Base64.length-1] = CompletarCeros(Base64[Base64.length-1]); // se completan los ceros
-        System.out.println("Nuevo Array con ceros completados: "+Arrays.toString(Base64)); // se muestra el array con ceros compleatados
-        System.out.println(Arrays.toString(toDecimal(Base64))); // se pasa a a decimal para la equivalencia
-        String base64=toBase64(toDecimal(Base64),igual); // se obtiene el mensaje en Base64
-        System.out.println("Base64: "+base64);
+    public void base64(String x){
 
+        int [] eq_ascii = EquivalenciaDecimal(x, x.toCharArray()); //Se convierte a decimal
+        String [] binary = EquivalenciaBinaria(eq_ascii); // se convierte a binario
+        String [] Base64 = SepararEn6(Texto(binary)).split(","); //separa en 6 bits
+        String aux = Iguales(Base64[Base64.length-1]); // obtiene los iguales que toca poner al final de la codificacion
+        System.out.println("Cantidad de iguales: "+aux);
+        Base64[Base64.length-1] = CompletarCeros(Base64[Base64.length-1]); //se completan los ceros.
+        System.out.println("Nuevo Array con ceros completados: "+Arrays.toString(Base64));
+        System.out.println(Arrays.toString(toDecimal(Base64)));
+        String base64=toBase64(toDecimal(Base64),aux);
+        System.out.println("Base64: "+base64);
+    }
+    public int [] EquivalenciaDecimal(String x, char[] caracteres){
+        int [] ascii = new int [x.length()];
+        for (int i = 0; i < x.length(); i++) {
+            ascii[i] = caracteres[i];
+        }
+        System.out.println(Arrays.toString(ascii));
+        return ascii;
+    }
+    public String[] EquivalenciaBinaria(int [] ascii){
+        String [] binary = new String [ascii.length];
+        for (int i = 0; i < ascii.length; i++) {
+            binary[i] = Integer.toBinaryString(ascii[i]);
+        }
+        System.out.println("Equivalencia ascii: " +Arrays.toString(binary));
+        System.out.println("Binario: "+Texto(binary));
+        return binary;
     }
     public String SepararEn6(String x) {
         int cont=0;
