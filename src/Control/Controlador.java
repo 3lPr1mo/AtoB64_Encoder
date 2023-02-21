@@ -13,6 +13,8 @@ public class Controlador {
     }
 
     public void iniciar(){
-
+        Codificador objC = new Codificador();
+        objC.setTxtAscii("hola");
+        objC.base64();
     }
 }
