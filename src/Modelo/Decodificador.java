@@ -57,6 +57,7 @@ public class Decodificador {
         for(int i = 0; i < num.length; i++){
             num[i] = valores.indexOf(chars[i]); //Se almacena el numero del caracter en base64
         }
+
         return num;
     }
     //bx=
