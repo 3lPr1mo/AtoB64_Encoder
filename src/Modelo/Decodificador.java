@@ -48,6 +48,7 @@ public class Decodificador {
         ascii = equivalenciaAscii(bin8);
         System.out.println(ascii);
         mensaje += ascii;
+
         return mensaje;
     }
 
